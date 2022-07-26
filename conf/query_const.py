@@ -13,11 +13,11 @@ def get_sessionId(uid):
     通过手机号获得sessionid
     """
     session_id_list = [
-        {"iphone": 1234444555, "verification": 1536, "uid": 11111111,
-         "sessionId": "sessionid=测试session",
+        {"iphone": 1234444555, "verification": 1536, "uid": "boe",
+         "sessionId": "sessionid=boe测试session",
          "remarks": "boe永久session_boe"},
-        {"iphone": 1234444555, "verification": 1536, "uid": 11111111,
-         "sessionId": "sessionid=测试session",
+        {"iphone": 1234444555, "verification": 1536, "uid": "prod",
+         "sessionId": "sessionid=prod测试session",
          "remarks": "线上永久session_boe"}
 
     ]
@@ -28,7 +28,7 @@ def get_sessionId(uid):
         return str("sessionId不存在")
 
 
-def eh_header(uid):
+def request_info(uid):
     """
 
     """
@@ -39,7 +39,12 @@ def eh_header(uid):
         "Cookie": sessionId}
     if ENV == "boe":
         eht_headers["X-Use-Boe"] = "1"
-    return eht_headers
+        params = ehp_bussiness_params_boe()
+    elif ENV == "prod":
+        params = ehp_bussiness_params_prod()
+    else:
+        raise ValueError("请检查配置文件conf/conf.ini 是否填写正确")
+    return eht_headers, params
 
 
 def ehp_bussiness_params_boe():
@@ -90,3 +95,7 @@ class BaseTestCase:
                         return {'result': None, 'msg': msg}
                     result = result[index]
         return {'result': result, 'msg': str(keyArrays)}
+
+
+if __name__ == '__main__':
+    print(request_info("boe"))
