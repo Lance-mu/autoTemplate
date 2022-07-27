@@ -88,7 +88,7 @@ def write_api_class(workbook, from_row=None, sheet_names=None):
             # 用途
             request_use = sheet.cell(i, 1).value
             request_name = '_'.join(request_path.split("/")[-2:])
-            if sheet_name == "h.api.play":
+            if sheet_name == "h.http.play":
                 file.write("def " + request_name + "(req, parent=None, check_schema=None, client=False):\n")
             else:
                 file.write("def " + request_name + "(req, header=None, check_schema=None, client=False):\n")
@@ -106,7 +106,7 @@ def write_api_class(workbook, from_row=None, sheet_names=None):
                 file.write(
                     "    " + "resp = do_query(host=host, request_type_path=" + request_path_name+ ", url_params=req, header=header, normal_check=False, check_schema=check_schema)\n")
             else:
-                if sheet_name == "h.api.play":
+                if sheet_name == "h.http.play":
                     file.write(
                         "    " + "resp = do_query(host=host, request_type_path=" + request_path_name + ", body=req, url_params=URL_PARAMS, header=header, normal_check=False, check_schema=check_schema)\n")
                 else:
@@ -150,7 +150,7 @@ def write_case_class(workbook, from_row=None, sheet_names=None):
             case_file = open(case_py_file_name, 'a')
             case_file.write("import pytest\n")
             case_file.write("import allure\n\n\n")
-            case_file.write("from api." + api_name + "_api import " + api_name + "_api\n")
+            case_file.write("from http." + api_name + "_api import " + api_name + "_api\n")
             date_py_file_name.replace("/", ".")
             data_key = '_'.join(request_path.split("/")[-2:]) + "_normal_data"
             case_file.write(
@@ -185,7 +185,7 @@ def write_case_class(workbook, from_row=None, sheet_names=None):
 
 
 def get_mark(sheet_name):
-    if sheet_name == "h.api.play":
+    if sheet_name == "h.http.play":
         return "play"
     else:
         return ""

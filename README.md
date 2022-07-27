@@ -4,9 +4,12 @@
 ```
 .
 ├── api # 根据各个psm封装接口层
-    ├── api
+    ├── http
     ├── rpc
 ├── auto_schema_builder # 自动生成case
+    ├── generate_http http接口生成
+    ├── generate_rpc rpc接口生成
+    ├── run 
 ├── common # 通用方法
 ├── conf # 配置层
     ├── query_const # 请求信息
@@ -15,3 +18,5 @@
     ├── output # 输出日志
 ├── testcase # 用例层
 ├── utils # 工具类
+    ├── http_utils 封装的HTTP请求
+    ├── sql 封装SQL脚本
