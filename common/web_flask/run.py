@@ -15,7 +15,7 @@ def login():
         "status": "login success"
     }
     if request.method == "GET":
-        return render_template('index.html')
+        return render_template('login.html')
     if request.method == "POST":
         name = request.form.get("name")
         password = request.form.get("password")
@@ -27,6 +27,10 @@ def login():
             abort(404)
             return None
 
+
+@app.route('/', methods=['GET', 'POST'])
+def home():
+    pass
 
 if __name__ == '__main__':
     app.run()
