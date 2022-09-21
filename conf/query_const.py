@@ -3,9 +3,9 @@
 """
 Time    : 2022/7/10 10:20 下午
 """
-from common.utils import Utils
-
-ENV = Utils.get_env()
+# from common.utils import Utils
+# 获取env环境
+# ENV = Utils.get_env()
 
 
 def get_sessionId(uid):

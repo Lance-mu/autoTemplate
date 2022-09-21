@@ -13,7 +13,7 @@ from logging.handlers import TimedRotatingFileHandler
 
 class Log:
     def __init__(self):
-        logFilePath = os.path.abspath(os.path.dirname(os.path.dirname(__file__))) + "/output/" + \
+        logFilePath = os.path.abspath(os.path.dirname(os.path.dirname(__file__))) + "/datas/output/" + \
                       time.strftime("%Y_%m_%d") + ".log"
         fmt = "%(asctime)s - %(pathname)s - %(levelname)s %(lineno)d行: %(message)s"
         self.logger = logging.getLogger()  # 创建日志器

@@ -15,7 +15,7 @@ def join(path1, path2):
 
 
 PRJ_PATH = path()
-API_PATH = join(PRJ_PATH, "api")
+API_PATH = join(PRJ_PATH, "http")
 COMMON_PATH = join(PRJ_PATH, "common")
 CONF_PATH = join(PRJ_PATH, "conf")
 DATES_PATH = join(PRJ_PATH, "datas")
