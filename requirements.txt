@@ -1,5 +1,4 @@
 allure-pytest==2.9.44
-allure-python-commons==2.9.44
 api==0.0.7
 asgiref==3.5.0
 attrs==21.2.0
@@ -98,5 +97,4 @@ Werkzeug==1.0.1
 wrapt==1.13.3
 xlrd==2.0.1
 zipp==3.6.0
-zope.event==4.4
-zope.interface==5.1.0
+
