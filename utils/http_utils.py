@@ -21,7 +21,7 @@ from jsonschema.exceptions import SchemaError, ValidationError
 urllib3.disable_warnings()
 
 
-class HttpGet():
+class httpGet():
     def __init__(self, host, path, url_params, header):
         self.url = "{}{}?{}".format(host, path, urlencode(url_params))
         self.header = header
@@ -33,7 +33,7 @@ class HttpGet():
         return resp
 
 
-class HttpPost():
+class httpPost():
     def __init__(self, host, path, url_params, body, header):
         self.url = "{}{}?{}".format(host, path, urlencode(url_params))
         self.body = body
