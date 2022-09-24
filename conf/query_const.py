@@ -3,10 +3,11 @@
 """
 Time    : 2022/7/10 10:20 下午
 """
-# from common.utils import Utils
+from utils.base import get_env
 # 获取env环境
-# ENV = Utils.get_env()
+ENV = get_env()
 
+# host=, path=,
 
 def get_sessionId(uid):
     """
@@ -27,6 +28,15 @@ def get_sessionId(uid):
     else:
         return str("sessionId不存在")
 
+def eh_header(uid):
+    sessionId = str(get_sessionId(uid))
+    eht_headers = {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Cookie": sessionId}
+    if ENV == "boe":
+        eht_headers["X-Use-Boe"] = "1"
+    return eht_headers
 
 def request_info(uid):
     """
