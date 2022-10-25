@@ -4,25 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>登录</title>
+    <title>注册</title>
 </head>
 
 <body>
     <div class="box">
-        {% if error != "None" %}
-        <h1>{{error}}</h1>
-        {% endif %}
-        <h3>欢迎访问Flask博客系统</h3>
-        <form action="login" method="post">
+        <h3>欢迎注册Flask博客系统</h3>
+        <form action="regist" method="post" enctype="multipart/form-data">
             <p>账号：<input type="text" name="account" id=""></p>
             <p>密码：<input type="password" name="password" id=""></p>
-            <p><input class="login-btn" type="submit" value="登录"></p>
-            <p>普通用户<input type="radio" name="type" value="2" id="">管理员<input type="radio" name="type" value="1" id=""></p>
+            <p>确认密码：<input type="password" name="cpassword" id=""></p>
+            <p>上传头像：<input type="file" name="avatar" id=""></p>
+            <p><input class="regist-btn" type="submit" value="注册"></p>
         </form>
-        <p>
-            <a href="forgetpwd">忘记密码</a>
-            <a href="./regist">注册</a>
-        </p>
     </div>
 </body>
 <style>
@@ -39,7 +33,7 @@
         padding: 10px;
     }
 
-    .login-btn {
+    .regist-btn {
         width: 100%;
         height: 30px;
         background-color: aqua;

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大厅</title>
+</head>
+
+<body>
+    <div class="box">
+        {% for user in ulist%}
+        <div class="blog">
+            <div class="header">
+                <span><img src="{{user.avator}}" alt="" srcset=""></span><span>用户：{{user.name}}</span>
+            </div>
+            {% for report in user.reports %}
+            <div>发布时间：{{report.create_time}} 阅读量：{{report.look_time}}</div>
+            <div class="part">
+                {{report.content}}...
+            </div>
+            <a href="detail/{{report.id}}">详情</a> {% endfor%}
+        </div>
+        {% endfor %}
+    </div>
+</body>
+<style>
+    body {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .box {
+        width: 90%;
+        height: 100%;
+    }
+
+    .box .blog .header {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        line-height: 100px;
+    }
+
+    .box .blog img {
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+    }
+</style>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户详情页</title>
+</head>
+
+<body>
+    <div class="box">
+        {% for report in rlist %}
+        <div class="blog">
+            <p class="title">{{report.title}}</p>
+            <div class="header">
+                <span>发布时间：{{report.create_time}}</span><span>观看数量：{{report.look_time}}</span>
+            </div>
+            <div class="detail">
+                {{report.content}}
+            </div>
+            <div class="delete">
+                <a href="#">删除</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+<style>
+    body {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .box {
+        width: 90%;
+        height: 100%;
+    }
+
+    .box .header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .box .blog .title {
+        font-size: larger;
+        font-weight: bolder;
+    }
+</style>
+
+</html>

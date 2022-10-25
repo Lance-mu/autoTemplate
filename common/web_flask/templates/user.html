@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的博客</title>
+</head>
+
+<body>
+    <div class="box">
+        <h1>欢迎回来我的主人<span style="font-weight: lighter;">{{name}}</span>
+            <a href="/display">发布</a>
+            <a href="/index">大厅</a>
+        </h1>
+
+        {% for item in rlist %}
+        <div class="blog">
+            <p class="title">{{item.title}}</p>
+            <div class="header">
+                <span>发布时间：{{item.create_time}}</span><span>观看数量：{{item.look_time}}</span>
+            </div>
+            <div class="detail">
+                {{item.content}}
+            </div>
+            <div class="delete">
+                <a href='delete/{{item.id}}'>删除</a>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</body>
+<style>
+    body {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .box {
+        width: 90%;
+        height: 100%;
+    }
+
+    .box .header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .box .blog .title {
+        font-size: larger;
+        font-weight: bolder;
+    }
+</style>
+
+</html>
