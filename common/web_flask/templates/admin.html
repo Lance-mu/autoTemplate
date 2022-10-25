@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理员</title>
+</head>
+
+<body>
+    <div class="box">
+        <h1>用户管理</h1>
+        {% for user in ulist %}
+        <div class="user">
+            <span><img src="{{user.avator}}" alt="" srcset=""></span>
+            <span>用户名：{{user.name}}</span>
+            <span>注册时间：{{user.create_time}}</span>
+            <span><a href="/delete/user/{{user.id}}">删除</a></span>
+            <span><a href="/userdetail/{{user.id}}">详情</a></span>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+<style>
+    body {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .box {
+        width: 90%;
+        height: 100%;
+    }
+
+    .box .user {
+        margin: 20px 0;
+        width: 100%;
+        height: 100px;
+        display: flex;
+        justify-content: space-between;
+        line-height: 100px;
+    }
+
+    .box .user img {
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+    }
+</style>
+
+</html>
