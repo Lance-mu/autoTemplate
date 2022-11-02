@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+    <script src="vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<!--准备好一个容器-->
+<div id="root">
+    <h1>插值语法: {{name}}</h1>
+
+    <a v-bind:href="url">指令语法：点我1</a><br>
+    <a :href="url">指令语法：点我2</a><br>
+
+    单向绑定：<input type="text" v-bind:value="name1"><br>
+    双向绑定：<input type="text" v-model:value="name1">
+</div>
+
+<br>
+<div id="root2">
+    <h1> {{name}}</h1>
+</div>
+
+
+<script type="text/javascript">
+    Vue.config.productionTip = false // 阻止vue在启动时生成生产提示
+
+    var app = new Vue({
+        el: '#root',
+        data:{
+            name: "vue test",
+            name1: "name1 test",
+            url: "http://www.atguigu.com"
+            }
+        })
+    console.log(app)
+
+    // el和data的第2种写法
+    var app1 = new Vue({
+        data:function(){
+            return{
+                name:"app2.data的第二种写法"
+            }
+        }
+
+    })
+    app1.$mount("#root2")
+
+    let person = {
+        name2: "张三",
+        sex: "男"
+    }
+    Object.defineProperty(person, 'age',{
+        value: 19,
+    })
+
+</script>
+</body>
+</html>
