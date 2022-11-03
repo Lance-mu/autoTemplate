@@ -41,20 +41,18 @@ def init_db():
 @app.route("/")
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    if request.method == "GET":
+        return render_template("login.html")
     if request.method == "POST":
-        try:
-            name = request.form["account"]
-            password = md5(request.form["password"])
-            _type = request.form["type"]
-            print("====", _type)
-        except:
-            return render_template("login.html", error="账号密码或用户类型为空")
-        # if name == "admin" and password == 123:
-        #     return render_template("user.html", name=name)
+        name = request.form["account"]
+        password = md5(request.form["password"])
+        _type = request.form["type"]
+        print("====", _type)
         user = User.query.filter_by(name=name, role_id=int(_type)).all()
-        print("user=", User.query.all())
-        print(not user)
-        if not user:
+        if user:
+
+            pass
+        else:
             return render_template("login.html", error="无该用户信息")
         user = user[0]
         if user.password != password:
