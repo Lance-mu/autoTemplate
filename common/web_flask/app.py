@@ -5,7 +5,7 @@ Time    : 2022/10/23 6:56 下午
 Author  : qianwulin@bytedance.com
 """
 # https://gitee.com/yiyizhang123/python_lessons/tree/master/flask/blog_web
-from flask import Flask, render_template, request, url_for, session, redirect
+from flask import Flask, render_template, request, url_for, session, redirect, flash
 from dev import DEVConfig
 from models import *
 from utils1 import md5, now_datetime
@@ -22,12 +22,12 @@ with app.app_context():
 def init_db():
     # admin = Role(name="管理员")
     # user = Role(name="普通用户")
-    # db.session.add_all([admin,user])
+    # db.session.add_all([admin, user])
     # db.session.commit()
 
     dic = {
         "name": "admin",
-        "password": "123",
+        "password": "d41d8cd98f00b204e9800998ecf8427e",
         "role_id": 1,
         "create_time": "2020-10-25 20:22",
         "avator": "https://img2.baidu.com/it/u=2467771531,3935277803&fm=11&fmt=auto&gp=0.jpg"
@@ -41,41 +41,72 @@ def init_db():
 @app.route("/")
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    if request.method == "GET":
-        return render_template("login.html")
     if request.method == "POST":
-        name = request.form["account"]
-        password = md5(request.form["password"])
-        _type = request.form["type"]
-        print("====", _type)
+        f = request.form
+        name = f["account"]
+        password = md5(f["password"])
+        try:
+            _type = f["type"]
+        except:
+            return render_template("login.html", error="用户类型为空")
         user = User.query.filter_by(name=name, role_id=int(_type)).all()
+        print("user=", user, '\n', f)
         if user:
-
-            pass
+            user = user[0]
+            print("type==", user.password, '\n', password)
+            if user.password == password:
+                session["username"] = name
+                if _type == "2":
+                    user_id = user.id
+                    rl = Report.query.filter_by(user_id=user_id).all()
+                    rlist = []
+                    for r in rl:
+                        rlist.append(r.__dict__)
+                    return render_template("user.html", name=name, rlist=rlist)
+                # 用户类型不为2，则进入管理界面
+                else:
+                    us = User.query.filter_by(role_id=2).all()
+                    ulist = []
+                    for u in us:
+                        ulist.append(u.__dict__)
+                    return render_template("admin.html", name=name, rlist=ulist)
+            else:
+                return render_template("login.html", error="密码错误")
         else:
             return render_template("login.html", error="无该用户信息")
-        user = user[0]
-        if user.password != password:
-            return render_template("login.html", error="用户密码错误")
-        if _type == "2":
-            session["username"] = name
-            user_id = user.id
-            rl = Report.query.filter_by(user_id=user_id).all()
-            rlist = []
-            for r in rl:
-                rlist.append(r.__dict__)
-            return render_template("user.html", name=name, rlist=rlist)
-        else:
-            session["username"] = name
-            us = User.query.filter_by(role_id=2).all()
-            ulist = []
-            for u in us:
-                ulist.append(u.__dict__)
-            return render_template("admin.html", ulist=ulist)
-    return render_template("login.html", error="None")
+    return render_template("login.html", error="请输入账号和密码")
+
+
+@app.route("/regist", methods=["GET","POST"])
+def regist():
+    if request.method == "POST":
+        f = request.form
+        dic = {
+            "name": request.form["account"],
+            "password": md5(request.form["password"]),
+            "role_id": 2
+        }
+        avatar = request.files["avatar"]
+        save_path = "./static/icon/" + avatar.filename
+        avatar.save(save_path)
+        dic["avator"] = save_path
+
+        db.session.add(User(**dic))
+        db.session.commit()
+        session["username"] = dic["name"]
+        return render_template("user.html", name=dic["name"])
+    return render_template("regist.html")
+
+
+# @app.route()
+# def errot():
+
 
 
 if __name__ == '__main__':
+
     app.run()
-    rl = Report.query.filter_by(user_id=1).all()
-    print(rl)
+
+
+
+
