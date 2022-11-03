@@ -4,18 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>注册</title>
+    <title>忘记密码</title>
 </head>
 
 <body>
     <div class="box">
-        <h3>欢迎注册自动化测试平台</h3>
-        <form action="regist" method="post" enctype="multipart/form-data">
+        <h3>重置密码</h3>
+        <form action="forgetpwd" method="post" enctype="multipart/form-data">
             <p>账号：<input type="text" name="account" id="username"></p>
-            <p>密码：<input type="password" name="password" id="id_password"></p>
-            <p>确认密码：<input type="password" name="cpassword" id="check_password"></p>
-            <p>上传头像：<input type="file" name="avatar" id="id_icon"></p>
-            <p><input class="regist-btn" type="submit" value="注册"></p>
+            <p>旧密码：<input type="password" name="password" id="old_password"></p>
+            <p>新密码：<input type="password" name="cpassword" id="new_password"></p>
+            <p><input class="regist-btn" type="submit" value="重置密码"></p>
         </form>
     </div>
 </body>

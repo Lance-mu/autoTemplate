@@ -98,3 +98,7 @@ wrapt==1.13.3
 xlrd==2.0.1
 zipp==3.6.0
 
+
+pytesseract~=0.3.10
+ddddocr~=1.4.7
+WTForms~=3.0.1

@@ -11,6 +11,12 @@
     ├── generate_rpc rpc接口生成
     ├── run 
 ├── common # 通用方法
+    ├── web_flask 测试平台登录界面
+        ├── app web平台登录主入口
+    ├── date_util.py 封装，可以调用的日期
+    ├── log 日志文件
+    ├── sql 数据库相关信息
+    ├── utilt 底层包
 ├── conf # 配置层
     ├── query_const # 请求信息
 ├── datas # 数据层
