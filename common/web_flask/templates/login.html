@@ -10,14 +10,14 @@
 <body>
     <div class="box">
         {% if error != "None" %}
-        <h1>{{error}}</h1>
+        <h2>{{error}}</h2>
         {% endif %}
         <h3>欢迎访问Flask博客系统</h3>
         <form action="login" method="post">
-            <p>账号：<input type="text" name="account" id=""></p>
-            <p>密码：<input type="password" name="password" id=""></p>
+            <p>账号：<input type="text" name="account" id="username"></p>
+            <p>密码：<input type="password" name="password" id="password"></p>
             <p><input class="login-btn" type="submit" value="登录"></p>
-            <p>普通用户<input type="radio" name="type" value="2" id="">管理员<input type="radio" name="type" value="1" id=""></p>
+            <p>普通用户<input type="radio" name="type" value="2" id="type_2">管理员<input type="radio" name="type" value="1" id="type_1"></p>
         </form>
         <p>
             <a href="forgetpwd">忘记密码</a>
