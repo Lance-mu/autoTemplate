@@ -6,6 +6,8 @@ Author  : qianwulin@bytedance.com
 """
 from configparser import ConfigParser
 import os
+from PIL import Image
+import ddddocr
 
 
 class Utils(object):
@@ -73,20 +75,46 @@ def requ_info():
 
 allfiles = []
 
+
 # 递归
 def getAllFiles(path, level):
     childFiles = os.listdir(path)
     for file in childFiles:
-        filepath = os.path.join(path,file)
+        filepath = os.path.join(path, file)
         if os.path.isdir(filepath):
-            getAllFiles(filepath, level+1)
-        allfiles.append("\t"*level + filepath)
+            getAllFiles(filepath, level + 1)
+        allfiles.append("\t" * level + filepath)
+
+
+
+
+def recognize(pic_path):
+    ocr = ddddocr.DdddOcr()
+    with open(pic_path, "rb") as f:
+        img_bytes = f.read()
+    res = ocr.classification(img_bytes)
+    return res
+    # image = Image.open(path)
+    # # 把图片处理成灰度图
+    # image = image.convert('L')
+    #
+    # threshold = 127  # 二值化阈值
+    # table = []
+    # for i in range(256):
+    #     if i < threshold:
+    #         table.append(0)
+    #     else:
+    #         table.append(1)
+    #
+    # image = image.point(table, '1')
+    # image.save(new_path)
+
 
 if __name__ == '__main__':
     """
     env是测试环境，env_label环境变量，ini文件不兼容时，去除注释
     """
-    # print(Utils.get_env())
-    getAllFiles("web_flask", 0)
-    for i in allfiles:
-        print(i)
+    print(recognize("jietu.jpg"))
+    # getAllFiles("web_flask", 0)
+    # for i in allfiles:
+    #     print(i)
