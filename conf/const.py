@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # coding:utf-8
-"""
-Time    : 2022/7/10 10:12 下午
-"""
+
 import os
 
 

@@ -4,10 +4,10 @@
 Time    : 2022/7/10 10:20 下午
 """
 from utils.base import get_env
+
 # 获取env环境
 ENV = get_env()
 
-# host=, path=,
 
 def get_sessionId(uid):
     """
@@ -23,10 +23,11 @@ def get_sessionId(uid):
 
     ]
     for i in session_id_list:
-        if uid == i["uid"]:
+        if uid == i[uid]:
             return i["sessionId"]
     else:
         return str("sessionId不存在")
+
 
 def eh_header(uid):
     sessionId = str(get_sessionId(uid))
@@ -38,9 +39,12 @@ def eh_header(uid):
         eht_headers["X-Use-Boe"] = "1"
     return eht_headers
 
+
 def request_info(uid):
     """
 
+    :param uid:
+    :return:
     """
     sessionId = str(get_sessionId(uid))
     eht_headers = {
@@ -78,6 +82,7 @@ def ehp_bussiness_params_prod():
         "version_name": "4.5.6",
     }
     return ehp_url_params1
+
 
 class BaseTestCase:
 

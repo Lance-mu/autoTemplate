@@ -5,16 +5,27 @@ from configparser import ConfigParser
 from conf.const import CONF_PATH, join
 
 
-class ConfFile:
+class Utils(object):
+    # 设置一个类属性来判断这个类是否实例化过对象
+    _instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if cls._instance is None:
+            cls._instance = object.__new__(cls)
+        return cls._instance
+
     def __init__(self):
         self.config = ConfigParser()
 
-    def read_conf(self, paths, section, keys):
+    def get_conf(self, paths, section, keys):
         self.config.read(paths)
-        value = self.config.get(section, keys)
-        return value
+        try:
+            # config[section][key]
+            return self.config.get(section, keys)
+        except KeyError:
+            raise KeyError(f"conf.ini, section:{section},key:{keys} not found, please check!")
 
-    def set_conf(self,):
+    def set_conf(self, ):
         # # 将数据写入到ini文件中
         # config.add_section('login')  # 首先添加一个新的section
         # config.set('login', 'username', 'admin')  # 写入数据
@@ -25,41 +36,25 @@ class ConfFile:
         # section = config.sections()
         # print(section)
 
-def get_env(envs="env"):
-    """
-    通过setup.ini配置文件，读取需要运行的env（boe,ppe,online）和分支变量，待完善部分
-    :return:
-    """
-    paths = join(CONF_PATH, "conf.ini")
-    value = ConfFile().read_conf(paths, "common", envs)
-    return value
+    def get_env(self) -> str:
+        """
+        框架中底层所使用的方法，业务可以使用，用于获取当前的env环境，使用方法:Utils().get_env()
+        :return:
+        """
+        file = join(CONF_PATH, "conf.ini")
+        value = self.get_conf(file, "common", "env")
+        return value
 
-
+    def get_env_lable(self) -> str:
+        """
+        框架中底层所使用的方法，业务可以使用，用于获取当前的env_label标签，使用方法:Utils().get_env_label()
+        :return:
+        """
+        file = join(CONF_PATH, "conf.ini")
+        print(file)
+        value = self.get_conf(file, "common", "env_label")
+        return value
 
 
 if __name__ == '__main__':
-    print(get_env())
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    print(Utils().get_env_lable())

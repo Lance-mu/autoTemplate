@@ -21,7 +21,6 @@ from common.log import Log
 urllib3.disable_warnings()
 
 
-
 class httpGet:
     def __init__(self, host, path, url_params, header):
         self.url = "{}{}?{}".format(host, path, urlencode(url_params))
