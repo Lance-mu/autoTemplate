@@ -1,6 +1,10 @@
 from datetime import datetime
 
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+
+from common.web_flask.dev import DEVConfig
+
 
 # 初始化SQLAlchemy
 db = SQLAlchemy()
@@ -49,5 +53,26 @@ class Report(db.Model):
         return "Report:%s" % self.title
 
 
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object(DEVConfig)
+    db.init_app(app)  # 初始化db
+    # import project.models
+
+    with app.app_context():
+        db.create_all()
+
+    return app
+
+
 if __name__ == '__main__':
-    print(datetime.now())
+    # app = create_app()
+    # u = db.session.execute(db.select(User).filter_by(name="admin")).all()
+    from sqlalchemy import select
+    u = select(User).where(User.name == "admin")
+
+    print(u)
+    # db.session.add(u)
+    # db.session.commit()
+    # info = User.query.filter_by(name="admin").all()
+    # print(info)

@@ -17,11 +17,11 @@ elif ENV == "prod":
     user_id = "online_123"
 
 
-@pytest.mark.testcase
-@allure.story("模板测试case")
-def test_case01():
-    res01 = testhttp.test_case01()
-    assert res01 == "except", f"测试test_case01实际结果：{res01}"
+# @pytest.mark.testcase
+# @allure.story("模板测试case")
+# def test_case01():
+#     res01 = testhttp.test_case01()
+#     assert res01 == "except", f"测试test_case01实际结果：{res01}"
 
 
 if __name__ == '__main__':

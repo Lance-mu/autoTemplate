@@ -80,7 +80,6 @@ def login():
 @app.route("/regist", methods=["GET","POST"])
 def regist():
     if request.method == "POST":
-        f = request.form
         dic = {
             "name": request.form["account"],
             "password": md5(request.form["password"]),
@@ -98,9 +97,21 @@ def regist():
     return render_template("regist.html")
 
 
+@app.route("/forgetpwd")
+def forgetpwd():
+    if request.method == "POST":
+        print("request.form",request.form)
+        name = request.form["username"]
+        # 管理员和用户可能同一个名字，后面待优化
+        print("name=", name)
+        user = User.query.filter_by(name=name).all()
+        print("user=", user)
+        return "test web"
+    return render_template("forgetpwd.html")
+
+
 # @app.route()
 # def errot():
-
 
 
 if __name__ == '__main__':

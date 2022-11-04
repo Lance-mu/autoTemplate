@@ -1,22 +1,24 @@
 #!/usr/bin/env python
 # coding:utf-8
-"""
-Time    : 2022/7/19 1:05 下午
-Author  : qianwulin@bytedance.com
-"""
-import xlrd
+
+# import xlrd
 import os
 import pandas as pd
-from conf.const import DATES_PATH,join
+from conf.const import API_PATH,DATES_PATH,join
 
 config_path = "../conf/"
 api_path = "../api/"
 case_path = "../testcase/tc_api/business_platform/"
 api_info = join(DATES_PATH, "data/api_info.xlsx")
-api_datas = pd.read_excel(api_info)
+api_datas = pd.read_excel(api_info, sheet_name=None)
+#  取所有sheetnames
+# 待更新，可以通过所有sheetname进行生成
+# def write_file():
+#     for sheet in list(api_datas):
+#         file_path = join(API_PATH, sheet)
+#         is_exists = os.path.exists(file_path)
 
-print(api_datas.sheetnames)
-
+print()
 
 def write_conf_class(workbook, from_row=None, sheet_names=None):
     """
@@ -26,6 +28,9 @@ def write_conf_class(workbook, from_row=None, sheet_names=None):
     :param from_row: 从第几行开始操作,默认是从第2行
     :return:
     """
+    for sheet_name in list(api_datas):
+        conf_file_name = config_path + sheet_name + "_conf.py"
+
     if sheet_names is None:
         sheet_names = workbook.sheet_names()[1:]
     for sheet_name in sheet_names:
@@ -215,4 +220,5 @@ if __name__ == '__main__':
     # write_api_class(workbook)
     # write_case_class(workbook)
     pass
+
 
